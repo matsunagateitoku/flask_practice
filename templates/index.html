@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold Word Display</title>
+    <style>
+        #output {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter a Word</h1>
+    <form method="POST">
+        <label for="user_input">Word:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if bold_word %}
+        <div id="output">
+            <p>Your word in bold: <strong>{{ bold_word }}</strong></p>
+        </div>
+    {% endif %}
+</body>
+</html>

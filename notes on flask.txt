@@ -1,0 +1,18 @@
+notes on flask
+
+#set up virtual env:
+	source myenv/bin/activate
+
+#check and see what is installed:
+	(myenv) scott@penguin:~/flasker$ pip freeze
+
+#install flask:
+	(myenv) scott@penguin:~/flasker$ pip install flask
+
+#set up
+	export FLASK_ENV=development
+	export FLASK_APP=hello.py
+	FLASK_ENV=development
+
+#Run the server 
+	flask run
