@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Tagger</title>
+</head>
+<body>
+    <h1>POS Tagger</h1>
+    
+    <!-- The form to submit text for POS tagging -->
+    <form action="/" method="POST">
+        <label for="text">Enter a sentence:</label><br>
+        <textarea name="text" id="text" rows="4" cols="50" required>{{ text }}</textarea><br><br>
+        <button type="submit">Tag POS</button>
+    </form>
+
+    {% if pos_tags %}
+    <hr>
+    <h2>POS Tagging Results:</h2>
+    <p><strong>Input Sentence:</strong> {{ text }}</p>
+    
+    <ul>
+        {% for word, tag in pos_tags %}
+            <li><strong>{{ word }}</strong>: {{ tag }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

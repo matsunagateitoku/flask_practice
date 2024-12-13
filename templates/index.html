@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bold Word Display</title>
-    <style>
-        #output {
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+    <!-- ... (rest of the code remains the same) -->
 </head>
 <body>
-    <h1>Enter a Word</h1>
-    <form method="POST">
-        <label for="user_input">Word:</label>
-        <input type="text" id="user_input" name="user_input" required>
-        <button type="submit">Submit</button>
+    <h1>POS Tagging App</h1>
+    <form method="post">
+        <input type="text" name="phrase" placeholder="Enter a phrase">
+        <button type="submit">Tag</button>
     </form>
-
-    {% if bold_word %}
-        <div id="output">
-            <p>Your word in bold: <strong>{{ bold_word }}</strong></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% if phrase %}
+        <h2>Tagged Phrase:</h2>
+        <div id="tagged">
+            {% for word, tag in tagged %}
+                {{ word }} ({{ tag }})<br>
+            {% endfor %}
         </div>
     {% endif %}
 </body>

@@ -1,0 +1,131 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER with spaCy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 320px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .entity {
+            font-weight: bold;
+            color: #2a7f56;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+            padding: 2px 4px;
+        }
+
+        .entity-type {
+            font-style: italic;
+            color: #555;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        #displacy-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter a Sentence to Extract Named Entities</h1>
+    <form method="POST">
+        <label for="user_input">Sentence:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if named_entities %}
+        <div id="output">
+            {% if named_entities[0][0] == "Error" %}
+                <p class="error">{{ named_entities[0][1] }}</p>
+            {% else %}
+                <p><strong>Extracted Named Entities:</strong></p>
+                <ul>
+                    {% for entity, entity_type in named_entities %}
+                        <li><span class="entity">{{ entity }}</span> - <span class="entity-type">{{ entity_type }}</span></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if displacy_html %}
+        <div id="displacy-container">
+            <p><strong>Named Entities Visualization:</strong></p>
+            {{ displacy_html | safe }}
+        </div>
+    {% endif %}
+</body>
+</html>

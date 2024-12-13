@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Tagging App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #tagged {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>POS Tagging App</h1>
+    <form method="post">
+        <input type="text" name="phrase" placeholder="Enter a phrase">
+        <button type="submit">Tag</button>
+    </form>
+    {% if phrase %}
+        <h2>Tagged Phrase:</h2>
+        <div id="tagged">
+            {% for word, tag in tagged %}
+                {{ word }} ({{ tag }})<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
